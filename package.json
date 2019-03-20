@@ -1,0 +1,8 @@
+{
+  "name": "kv-node",
+  "version": "1.0.0",
+  "main": "server.js",
+  "repository": "https://github.com/VibhorCodecianGupta/node_CLI.git",
+  "author": "shinigami",
+  "license": "MIT"
+}
