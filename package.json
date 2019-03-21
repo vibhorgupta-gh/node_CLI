@@ -6,6 +6,7 @@
   "author": "shinigami",
   "license": "MIT",
   "dependencies": {
+    "axios": "^0.18.0",
     "body-parser": "^1.18.3",
     "commander": "^2.19.0",
     "cookie-parser": "^1.4.4",

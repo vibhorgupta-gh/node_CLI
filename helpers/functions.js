@@ -5,7 +5,10 @@ mongoose.Promise = global.Promise
 const get = async (key) => {
   try {
     const pair = await Pair.findOne({key: key})
-    return pair
+    if (pair)
+      return pair
+    else
+      return false
   } catch (e) {
       console.error(e.message)
   }
@@ -16,7 +19,7 @@ const set = async (key, value) => {
     const exists = await Pair.findOne({key: key})
     let pair
     if (exists) {
-      pair = Pair.findOneAndUpdate({key: key})
+      pair = Pair.findOneAndUpdate({key: key}, {value: value})
     }
     else {
       pair = Pair.create({key: key, value: value})

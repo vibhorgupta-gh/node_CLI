@@ -5,7 +5,10 @@ const {get, set} = require('../helpers/functions')
 
 router.get('/get/:key', async (req, res, next) => {
   let pair = await get(req.params.key)
-  res.json({value: pair.value})
+  if (pair)
+    res.json({value: pair.value})
+  else
+    res.json({value: null})
 })
 
 router.get('/set/:key/:value', async (req, res, next) => {
