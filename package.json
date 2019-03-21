@@ -6,7 +6,10 @@
   "author": "shinigami",
   "license": "MIT",
   "dependencies": {
+    "body-parser": "^1.18.3",
     "commander": "^2.19.0",
+    "cookie-parser": "^1.4.4",
+    "express": "^4.16.4",
     "mongoose": "^5.4.19"
   }
 }
