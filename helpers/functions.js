@@ -19,7 +19,7 @@ const set = async (key, value) => {
     const exists = await Pair.findOne({key: key})
     let pair
     if (exists) {
-      pair = Pair.findOneAndUpdate({key: key}, {value: value})
+      pair = Pair.findOneAndUpdate({key: key}, {value: value}, {new: true})
     }
     else {
       pair = Pair.create({key: key, value: value})

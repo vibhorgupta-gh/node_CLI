@@ -2,6 +2,7 @@
 
 const store = require('commander')
 const axios = require('axios')
+const {isUpdated} = require('./helpers/util')
 
 store
   .version('0.0.1')
@@ -45,8 +46,30 @@ store
   .command('watch <key>')
   .alias('w')
   .description('Watches the argument key')
-  .action((key) => {
-    console.log(key)
+  .action(async (key) => {
+    try{
+      var current = key
+      let currentVal = await axios.get(`http://localhost:4000/get/${current}`)
+      currentVal = currentVal.data.value
+      // const pair = await axios.get(`http://localhost:4000/get/${key}`)
+      if (!currentVal)
+        console.log(`\n\nThis key doesn\'t exist.\n\n`)
+      else{
+        console.log(`\n\nWatching key ${key} for any changes in value\n\n`)
+        while (true) {
+          let update = await isUpdated(key, current)
+          if (update) {
+            newValue = await axios.get(`http://localhost:4000/get/${current}`)
+            newValue = newValue.data.value
+            console.log(`New value of ${current} is ${newValue}`)
+          }
+          continue
+        }
+      }
+    }
+    catch (e) {
+      console.log("\n\nSomething went wrong with our servers!")
+    }
   })
 
 store.parse(process.argv)
