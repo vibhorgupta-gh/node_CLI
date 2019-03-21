@@ -1,10 +1,15 @@
 {
-  "name": "kv-node",
+  "name": "kv",
   "version": "1.0.0",
   "main": "server.js",
   "repository": "https://github.com/VibhorCodecianGupta/node_CLI.git",
   "author": "shinigami",
+  "preferGlobal": true,
+  "bin": "./store.js",
   "license": "MIT",
+  "scripts": {
+    "test": "cd test && mocha --timeout 20000 --exit"
+  },
   "dependencies": {
     "axios": "^0.18.0",
     "body-parser": "^1.18.3",
@@ -12,5 +17,11 @@
     "cookie-parser": "^1.4.4",
     "express": "^4.16.4",
     "mongoose": "^5.4.19"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
+    "chai-http": "^4.2.1",
+    "mocha": "^6.0.2"
   }
 }

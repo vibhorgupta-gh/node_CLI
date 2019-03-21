@@ -14,4 +14,8 @@ const isUpdated = async (key, current) => {
   }
 }
 
-module.exports = { isUpdated }
+const handleResponse = (response, statusCode, message, value) => {
+  return response.status(statusCode).json({ msg: message, value: value })
+}
+
+module.exports = { isUpdated, handleResponse }

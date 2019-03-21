@@ -15,8 +15,8 @@ store
   .action(async (key, value) => {
     try{
       const pair = await axios.get(`http://localhost:4000/set/${key}/${value}`)
-      if (pair.data.value)
-        console.log(`\n\nSuccessfully set key: ${pair.data.key} with value: ${pair.data.value}\n\n`)
+      if (pair.data.value.value)
+        console.log(`\n\nSuccessfully set key: ${pair.data.value.key} with value: ${pair.data.value.value}\n\n`)
       else
         console.log(`\n\nThis key doesn\'t exist.`)
     }
