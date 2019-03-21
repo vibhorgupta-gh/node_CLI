@@ -8,7 +8,8 @@
   "bin": "./store.js",
   "license": "MIT",
   "scripts": {
-    "test": "cd test && mocha --timeout 20000 --exit"
+    "test": "cd test && mocha --timeout 20000 --exit",
+    "test:report": "nyc npm test"
   },
   "dependencies": {
     "axios": "^0.18.0",
@@ -22,6 +23,19 @@
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
     "chai-http": "^4.2.1",
-    "mocha": "^6.0.2"
+    "mocha": "^6.0.2",
+    "nyc": "^13.3.0"
+  },
+  "nyc": {
+    "extensions": [
+      ".js"
+    ],
+    "reporter": [
+      "html",
+      "text-lcov",
+      "text",
+      "lcovonly"
+    ],
+    "sourceMap": true
   }
 }
