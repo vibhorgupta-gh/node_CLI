@@ -4,5 +4,9 @@
   "main": "server.js",
   "repository": "https://github.com/VibhorCodecianGupta/node_CLI.git",
   "author": "shinigami",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^2.19.0",
+    "mongoose": "^5.4.19"
+  }
 }
