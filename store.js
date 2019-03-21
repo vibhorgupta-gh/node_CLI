@@ -51,7 +51,6 @@ store
       var current = key
       let currentVal = await axios.get(`http://localhost:4000/get/${current}`)
       currentVal = currentVal.data.value
-      // const pair = await axios.get(`http://localhost:4000/get/${key}`)
       if (!currentVal)
         console.log(`\n\nThis key doesn\'t exist.\n\n`)
       else{
