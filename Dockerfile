@@ -1,15 +1,12 @@
-FROM node:8
+FROM ubuntu:16.04
 
-WORKDIR /app
+RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927
+RUN echo "deb http://repo.mongodb.org/apt/ubuntu $(cat /etc/lsb-release | grep DISTRIB_CODENAME | cut -d= -f2)/mongodb-org/3.2 multiverse" | tee /etc/apt/sources.list.d/mongodb-org-3.2.list
 
-COPY package.json app/
-COPY yarn.lock app/
+RUN apt-get update && apt-get install -y mongodb-org
 
-RUN cd app/ && yarn install
+RUN mkdir -p /data/db
 
-COPY . /app
+EXPOSE 27017
 
-EXPOSE 4000
-
-ENTRYPOINT ["node"]
-CMD ["server.js"]
+ENTRYPOINT ["/usr/bin/mongod"]
