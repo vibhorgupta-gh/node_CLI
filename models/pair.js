@@ -1,6 +1,10 @@
 const mongoose = require('mongoose')
+const {url} = require('../config/conf')
 mongoose.Promise = global.Promise
 const Schema = mongoose.Schema
+
+mongoose.connect(url, { useNewUrlParser: true })
+const db = mongoose.connection
 
 const pairSchema = new Schema({
   key:{
@@ -11,5 +15,5 @@ const pairSchema = new Schema({
   }
 })
 
-const pair = mongoose.model('pair', pairSchema)
-module.exports = pair
+const Pair = mongoose.model('pair', pairSchema)
+module.exports = { db, Pair }

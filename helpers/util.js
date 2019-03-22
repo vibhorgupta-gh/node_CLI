@@ -1,10 +1,8 @@
-const axios = require('axios')
+const { get, set } = require('./functions')
 
 const isUpdated = async (key, current) => {
-  let keyVal = await axios.get(`http://localhost:4000/get/${key}`)
-  keyVal = keyVal.data.value
-  let currVal = await axios.get(`http://localhost:4000/get/${current}`)
-  currVal = currVal.data.value
+  let keyVal = await get(key)
+  let currVal = await get(current)
 
   if (currVal == keyVal) {
     return false
@@ -14,8 +12,4 @@ const isUpdated = async (key, current) => {
   }
 }
 
-const handleResponse = (response, statusCode, message, value) => {
-  return response.status(statusCode).json({ msg: message, value: value })
-}
-
-module.exports = { isUpdated, handleResponse }
+module.exports = { isUpdated }

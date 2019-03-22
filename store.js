@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
 const store = require('commander')
-const axios = require('axios')
-const {isUpdated} = require('./helpers/util')
+const { isUpdated } = require('./helpers/util')
+const { get, set } = require('./helpers/functions')
 
 store
   .version('0.0.1')
@@ -14,14 +14,14 @@ store
   .description('Sets the argument key value pair')
   .action(async (key, value) => {
     try{
-      const pair = await axios.get(`http://localhost:4000/set/${key}/${value}`)
-      if (pair.data.value.value)
-        console.log(`\n\nSuccessfully set key: ${pair.data.value.key} with value: ${pair.data.value.value}\n\n`)
+      const pair = await set(key, value)
+      if (pair.value)
+        console.log(`\n\nSuccessfully set key: ${pair.key} with value: ${pair.value}\n\n`)
       else
         console.log(`\n\nThis key doesn\'t exist.`)
     }
     catch (e) {
-      consle.log("\n\nSomething went wrong with our servers!")
+      console.log("\n\nSomething went wrong with our servers! " + e)
     }
   })
 
@@ -31,14 +31,15 @@ store
   .description('Fetches the argument key value pair')
   .action(async (key) => {
     try{
-      const pair = await axios.get(`http://localhost:4000/get/${key}`)
-      if (pair.data.value)
-        console.log(`\n\nSuccessfully fetched key: ${key} with value: ${pair.data.value}\n\n`)
+      const pair = await get(key)
+      if (pair.value)
+        console.log(`\n\nSuccessfully fetched key: ${key} with value: ${pair.value}\n\n`)
       else
         console.log(`\n\nThis key doesn\'t exist.\n\n`)
+      return
     }
     catch (e) {
-      consle.log("\n\nSomething went wrong with our servers!")
+      console.log("\n\nSomething went wrong with our servers! ")
     }
   })
 
@@ -49,8 +50,8 @@ store
   .action(async (key) => {
     try{
       var current = key
-      let currentVal = await axios.get(`http://localhost:4000/get/${current}`)
-      currentVal = currentVal.data.value
+      let currentVal = get(current)
+      currentVal = currentVal.value
       if (!currentVal)
         console.log(`\n\nThis key doesn\'t exist.\n\n`)
       else{
@@ -58,8 +59,8 @@ store
         while (true) {
           let update = await isUpdated(key, current)
           if (update) {
-            newValue = await axios.get(`http://localhost:4000/get/${current}`)
-            newValue = newValue.data.value
+            newValue = await get(current)
+            newValue = newValue.value
             console.log(`New value of ${current} is ${newValue}`)
           }
           continue
