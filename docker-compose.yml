@@ -1,0 +1,15 @@
+version: "2"
+services:
+  app:
+    container_name: app
+    restart: always
+    build: .
+    ports:
+      - "4000:4000"
+    depends_on:
+      - mongo
+  mongo:
+    container_name: mongo
+    image: mongo:4.0
+    ports:
+      - "27017:27017"

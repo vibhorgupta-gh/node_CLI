@@ -1,5 +1,5 @@
 {
-  "name": "kv",
+  "name": "store",
   "version": "1.0.0",
   "main": "server.js",
   "repository": "https://github.com/VibhorCodecianGupta/node_CLI.git",
@@ -7,7 +7,11 @@
   "preferGlobal": true,
   "bin": "./store.js",
   "license": "MIT",
+  "bin": {
+    "store": "./store.js"
+  },
   "scripts": {
+    "start": "node server.js",
     "test": "cd test && mocha --timeout 20000 --exit",
     "test:report": "nyc npm test"
   },
