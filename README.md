@@ -15,6 +15,9 @@ Store is a CLI tool built with [Node](https://nodejs.org/en/docs/) for scripting
   ```
 
 - Change directory into project root
+  ```
+  cd kv-node/
+  ```
 
 - For installing node dependencies, run
   ```
